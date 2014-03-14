@@ -1,4 +1,4 @@
-package test.pmso;
+package execute;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import pmso.PMSO;
 import pmso.PMSOAnimation;
 import visual.DrawConfig;
 
-public class TestPMSO {
+public class AnimatePMSO {
 	static STPConfig stpcfg = new STPConfig(
 			100,		// Nb of points,
 			7,		// index of data

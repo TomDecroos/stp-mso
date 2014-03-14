@@ -14,7 +14,7 @@ public class KruskallMST {
 
 	static STPConfig stpcfg = new STPConfig(
 			100,		// Nb of points,
-			5,		// index of data
+			6,		// index of data
 			0		// Nb of Steiner points
 			);
 	static DrawConfig drawcfg = new DrawConfig(

@@ -29,12 +29,13 @@ public class PMSOAnimation {
 	public void play() {
 		 JFrame frame=new JFrame();
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         frame.setBounds(drawcfg.x,drawcfg.y,drawcfg.width,drawcfg.length);
          DrawPanel draw=new DrawPanel();
          frame.getContentPane().add(draw);
-         frame.setSize(drawcfg.length,drawcfg.width);
          frame.setVisible(true);
          for(int i=0;i<steps;i++) {
         	 solver.evolve();
+        	 draw.counter++;
         	 draw.repaint();
         	 try{Thread.sleep(sleep); } catch(Exception e) {}
          }
@@ -78,7 +79,6 @@ public class PMSOAnimation {
 		    paintParticles(g,solver.swarms);
 			paintSteinerTree(g,solver.getSteinerTree());
 			paintBottleNeck(g,solver.getSteinerTree());
-			counter++;
 		    g.setColor(Color.BLACK);
 		    g.drawString("Cycle: " + counter + "/" + steps, 50, 50);
 		    g.drawString("Bottleneck: " + solver.getSteinerTree().getBottleneck().getLength() , 150, 50);
