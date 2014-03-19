@@ -7,7 +7,6 @@ import kruskall.Kruskall;
 import visual.DrawConfig;
 import visual.TreeDrawer;
 import disjointset.Node;
-import basic.Point;
 import basic.Tree;
 
 public class KruskallMST {

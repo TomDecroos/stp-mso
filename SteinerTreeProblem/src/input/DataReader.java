@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import steiner.STP;
 
@@ -46,7 +46,7 @@ public class DataReader {
 	}
 	
 	public STP[] getSTPs(int k) {
-		int l = Array.getLength(arraysOfPoints);
+		int l = arraysOfPoints.length;
 		STP[] problems = new STP[l];
 		for(int i=0;i<l;i++) {
 			problems[i] = new STP(arraysOfPoints[i],k);
@@ -56,6 +56,11 @@ public class DataReader {
 	
 	public STP getSTP(int index, int nbOfSteinerPoints) {
 		return new STP(arraysOfPoints[index],nbOfSteinerPoints);
+	}
+	
+	public STP getSTP(int index, int nbOfSteinerPoints, int nbOfPoints) {
+		Point[] points = Arrays.copyOf(arraysOfPoints[index], nbOfPoints);
+		return new STP(points,nbOfSteinerPoints);
 	}
 	
 	public void printpoints(int i) {

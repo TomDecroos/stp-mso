@@ -22,4 +22,11 @@ public class STPConfig {
 		dr.readData(BENCHMARKLOCATION + BENCHMARKNAME + size +".txt");
 		return dr.getSTP(index, k);
 	}
+	
+	public STP getSTP(int points) throws NumberFormatException, IOException {
+		DataReader dr = new DataReader();
+		dr.readData(BENCHMARKLOCATION + BENCHMARKNAME + size +".txt");
+		return dr.getSTP(index, k, points);
+	}
+	
 }

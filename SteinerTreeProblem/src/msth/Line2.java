@@ -1,15 +1,13 @@
-package steiner;
+package msth;
 
 import basic.Line;
-import disjointset.Node;
+import basic.Point;
 
-
-public class Edge implements Line {
+public class Line2 implements Line{
+	private Point a;
+	private Point b;
 	
-	private Node a;
-	private Node b;
-
-	public Edge(Node a, Node b) {
+	public Line2(Point a, Point b) {
 		this.a = a;
 		this.b = b;
 	}
@@ -26,11 +24,11 @@ public class Edge implements Line {
 		return x*x + y*y;
 	}
 
-	public Node getA() {
+	public Point getA() {
 		return a;
 	}
 
-	public Node getB() {
+	public Point getB() {
 		return b;
 	}
 	
@@ -43,4 +41,5 @@ public class Edge implements Line {
 	public String toString() {
 		return a.toString() + " ---> " + b.toString() + " length: " + getLength();
 	}
+
 }

@@ -10,12 +10,12 @@ import visual.DrawConfig;
 public class AnimatePMSO {
 	static STPConfig stpcfg = new STPConfig(
 			100,		// Nb of points,
-			7,		// index of data
+			3,		// index of data
 			25		// Nb of Steiner points
 			);
 	
-	static int swarmsize = 1000;	// swarmsize
-	static int cycles = 50;	// cycles
+	static int swarmsize = 5000;	// swarmsize
+	static int cycles = 500;	// cycles
 	static double w1 =	0.99;		// w1
 	static double w2 = 0.25;	// w2
 	
