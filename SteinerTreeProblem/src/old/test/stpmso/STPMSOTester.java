@@ -7,7 +7,6 @@ import old.input.DataConfig;
 import animate.Animate;
 import animate.AnimateConfig;
 
-import stpmso.BottleneckComparator;
 import stpmso.STPMSO;
 import stpmso.STPMSOConfig;
 import stpmso.TreeLengthComparator;

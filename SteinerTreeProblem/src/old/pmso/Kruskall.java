@@ -6,7 +6,6 @@ import java.util.Arrays;
 import old.steiner.Edge;
 
 import basic.Point;
-import basic.Tree;
 import disjointset.DisjointSet;
 import disjointset.Node;
 

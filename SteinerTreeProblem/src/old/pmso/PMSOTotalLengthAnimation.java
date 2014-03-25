@@ -147,12 +147,6 @@ public class PMSOTotalLengthAnimation {
 			}
 			return false;
 		}
-
-		private void paintBottleNeck(Graphics g, SteinerTree steinerTree) {
-			g.setColor(Color.GREEN);
-			paintLine(g,steinerTree.getBottleneck());
-			
-		}
 		
 		private void paintParticles(Graphics g, Particle[][] swarms) {
 			Color[] colors = new Color[] {	Color.BLUE,

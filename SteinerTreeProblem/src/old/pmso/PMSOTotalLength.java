@@ -1,6 +1,5 @@
 package old.pmso;
 
-import old.pmso.PMSO.Particle;
 import old.steiner.STP;
 import animate.SteinerTree;
 import basic.Tree;
