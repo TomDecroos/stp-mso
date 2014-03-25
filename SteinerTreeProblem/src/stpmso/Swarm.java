@@ -7,12 +7,12 @@ import disjointset.Node;
  * @author Tom
  *
  */
-public class STPSwarm {
+public class Swarm {
 	
 	private Particle[] particles;
 	private Node node;
 	
-	public STPSwarm(Particle[] swarm, Node node) {
+	public Swarm(Particle[] swarm, Node node) {
 		this.particles = swarm;
 		this.node = node;
 	}

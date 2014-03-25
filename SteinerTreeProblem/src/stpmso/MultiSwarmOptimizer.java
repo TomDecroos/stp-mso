@@ -2,6 +2,7 @@ package stpmso;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import disjointset.Node;
 
@@ -13,7 +14,7 @@ import basic.Point;
  * @author Tom
  *
  */
-public class STPMSO {
+public class MultiSwarmOptimizer {
 	/**
 	 * The basic minimal spanning tree of the given points,
 	 * without any steiner points.
@@ -48,7 +49,7 @@ public class STPMSO {
 	/**
 	 * The list of swarms
 	 */
-	private ArrayList<STPSwarm> swarms;
+	private ArrayList<Swarm> swarms;
 	
 	/**
 	 * The swarm size of each swarm per steiner point
@@ -60,7 +61,7 @@ public class STPMSO {
 	 * @param points
 	 * @param comparator
 	 */
-	public STPMSO(Point[] points, int max, int swarmsize,
+	public MultiSwarmOptimizer(Point[] points, int max, int swarmsize,
 			double w1, double w2, Comparator<MinimalSpanningTree> comparator) {
 		setup(points);
 		this.max = max;
@@ -74,10 +75,10 @@ public class STPMSO {
 		Node[] nodes = Kruskall.convertToNodes(points);
 		this.basic = Kruskall.constructMinimalSpannningTree(nodes);
 		this.best = basic;
-		this.swarms = new ArrayList<STPSwarm>();
+		this.swarms = new ArrayList<Swarm>();
 	}
 	
-	public STPMSO(Point[] points, STPMSOConfig cfg,
+	public MultiSwarmOptimizer(Point[] points, MultiSwarmOptimizerConfig cfg,
 			Comparator<MinimalSpanningTree> comparator) {
 		this(points,cfg.max,cfg.swarmsize,cfg.w1,cfg.w2,comparator);
 	}
@@ -96,7 +97,7 @@ public class STPMSO {
 	 * Evolves the swarms 1 cycle
 	 */
 	public void evolve() {
-		if(swarms.size() <= max) {
+		if(swarms.size() < max) {
 			tryNewSwarm();
 		}
 		fly();
@@ -113,14 +114,16 @@ public class STPMSO {
 			MinimalSpanningTree temp = Kruskall.extendMinimalSpanningTree(best,node);
 			if(comparator.compare(temp, best) < 0) {
 				best = temp;
-				swarms.add(new STPSwarm(particles,node));
+				swarms.add(new Swarm(particles,node));
 				break;
 			}
 		}
 	}
 	
 	private void fly() {
-		for(STPSwarm swarm : swarms) {
+		Iterator<Swarm> iterator = swarms.iterator();
+		while(iterator.hasNext()) {
+			Swarm swarm = iterator.next();
 			Node[] nodes = getOtherSteinerNodes(swarm.getNode());
 			MinimalSpanningTree temp = Kruskall.extendMinimalSpanningTree(basic,nodes);
 			for(Particle p : swarm.getParticles()) {
@@ -131,6 +134,10 @@ public class STPMSO {
 					best = candidate;
 					swarm.setNode(node);
 				}
+			}
+			if(comparator.compare(temp,best) <= 0 ) {
+				iterator.remove();
+				best = temp;
 			}
 		}
 	}
@@ -145,7 +152,7 @@ public class STPMSO {
 
 	private Node[] getOtherSteinerNodes(Node node) {
 		ArrayList<Node> nodes = new ArrayList<Node>();
-		for(STPSwarm swarm : swarms) {
+		for(Swarm swarm : swarms) {
 			if(swarm.getNode() != node) nodes.add(swarm.getNode());
 		}
 		return nodes.toArray(new Node[0]);
@@ -154,7 +161,7 @@ public class STPMSO {
 	private Node[] getSteinerNodes() {
 		Node[] nodes = new Node[swarms.size()];
 		int i=0;
-		for(STPSwarm swarm : swarms) {
+		for(Swarm swarm : swarms) {
 			nodes[i++] = swarm.getNode();
 		}
 		return nodes;
@@ -171,7 +178,7 @@ public class STPMSO {
 	public Particle[][] getParticles() {
 		Particle[][] particles = new Particle[swarms.size()][];
 		int i=0;
-		for(STPSwarm swarm: swarms) {
+		for(Swarm swarm: swarms) {
 			particles[i++] = swarm.getParticles();
 		}
 		return particles;

@@ -7,16 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import stpmso.Particle;
-import stpmso.STPMSO;
+import stpmso.MultiSwarmOptimizer;
 import basic.Line;
 import basic.Point;
 
-public class Animate {
-	STPMSO solver;
+public class Animator {
+	MultiSwarmOptimizer solver;
 	int cycles;
-	AnimateConfig cfg;
+	AnimatorConfig cfg;
 	
-	public Animate(STPMSO solver, int cycles, AnimateConfig cfg) {
+	public Animator(MultiSwarmOptimizer solver, int cycles, AnimatorConfig cfg) {
 		this.solver = solver;
 		this.cycles = cycles;
 		this.cfg = cfg;

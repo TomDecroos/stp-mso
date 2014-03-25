@@ -1,6 +1,6 @@
 package stpmso;
 
-public class STPMSOConfig {
+public class MultiSwarmOptimizerConfig {
 	public int max; // max steiner points
 	public int swarmsize;
 	public double w1; // weight of original velocity.
@@ -14,7 +14,7 @@ public class STPMSOConfig {
 	 * @param w1
 	 * @param w2
 	 */
-	public STPMSOConfig(int max, int swarmsize, double w1, double w2) {
+	public MultiSwarmOptimizerConfig(int max, int swarmsize, double w1, double w2) {
 		this.max = max;
 		this.swarmsize = swarmsize;
 		this.w1 = w1;
@@ -28,7 +28,7 @@ public class STPMSOConfig {
 	 * @param w1
 	 * @param w2
 	 */
-	public STPMSOConfig(int swarmsize, double w1, double w2) {
+	public MultiSwarmOptimizerConfig(int swarmsize, double w1, double w2) {
 		this(Integer.MAX_VALUE,swarmsize,w1,w2);
 	}
 }

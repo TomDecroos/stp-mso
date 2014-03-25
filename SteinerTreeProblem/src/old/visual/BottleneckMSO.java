@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import stpmso.Particle;
-import stpmso.STPMSO;
+import stpmso.MultiSwarmOptimizer;
 
 import animate.SteinerTree;
 import basic.Line;
@@ -16,11 +16,11 @@ import basic.Point;
 public class BottleneckMSO {
 	
 
-	private STPMSO solver;
+	private MultiSwarmOptimizer solver;
 	private int steps;
 	private DrawConfig drawcfg;
 	private int sleep;
-	public BottleneckMSO(STPMSO solver, int steps, int sleep, DrawConfig drawcfg) {
+	public BottleneckMSO(MultiSwarmOptimizer solver, int steps, int sleep, DrawConfig drawcfg) {
 		this.solver = solver;
 		this.steps = steps;
 		this.drawcfg = drawcfg;

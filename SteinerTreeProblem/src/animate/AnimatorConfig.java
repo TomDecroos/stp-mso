@@ -2,7 +2,7 @@ package animate;
 
 import java.awt.Color;
 
-public class AnimateConfig {
+public class AnimatorConfig {
 	public int x;
 	public int y;
 	public int width;
@@ -23,19 +23,25 @@ public class AnimateConfig {
 		Color.orange,
 		Color.YELLOW};
 	
-	public AnimateConfig() {
+	public AnimatorConfig() {
 		this(0,0,650,650);
 	}
 
-	public AnimateConfig(int x, int y, int width, int height) {
+	public AnimatorConfig(int x, int y, int width, int height) {
 		this(x,y,width,height,4,2);
 	}
 
-	public AnimateConfig(int x, int y, int width, int height, int graphpointsize, int particlepointsize) {
+	public AnimatorConfig(int x, int y, int width, int height, int graphpointsize, int particlepointsize) {
 		this(x,y,width,height,graphpointsize,particlepointsize,0,true,true,true);
 	}
-
-	public AnimateConfig(int x, int y, int width, int length,
+	public AnimatorConfig(boolean steinerEdges, boolean bottleneck, boolean particles) {
+		this();
+		this.steinerEdges = steinerEdges;
+		this.bottleneck = bottleneck;
+		this.particles = particles;
+	}
+	
+	public AnimatorConfig(int x, int y, int width, int length,
 			int graphpointsize, int particlepointsize, int sleep,
 			boolean steinerEdges, boolean bottleneck, boolean particles) {
 		this.x = x;

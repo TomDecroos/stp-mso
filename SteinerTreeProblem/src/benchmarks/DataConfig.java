@@ -1,4 +1,4 @@
-package old.input;
+package benchmarks;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
