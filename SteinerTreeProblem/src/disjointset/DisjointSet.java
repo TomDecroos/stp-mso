@@ -36,6 +36,7 @@ public class DisjointSet {
 	public static boolean sameSet(Node x, Node y) {
 		return find(x) == find(y);
 	}
+	
 	public static void reset(Node[] nodes) {
 		for(Node node : nodes) {
 			node.parent = node;

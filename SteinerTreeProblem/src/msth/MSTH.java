@@ -1,17 +1,16 @@
 package msth;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import kruskall.KruskallMethods;
+import old.kruskall.KruskallMethods;
+import old.steiner.STP;
+
+import animate.SteinerTree;
 import basic.Line;
 import basic.Point;
 import basic.Tree;
-import steiner.Edge;
-import steiner.STP;
-import steiner.SteinerTree;
 
 public class MSTH {
 
@@ -29,9 +28,10 @@ public class MSTH {
 			Collections.sort(lines);
 		}
 		
-		Point[] points = KruskallMethods.merge(tree.getPoints(),steinerPoints);
+		//Point[] points = KruskallMethods.merge(tree.getPoints(),steinerPoints);
+		// ERROR: WTF?
 		Line[] newlines = lines.toArray(new Line[0]);
-		return new SteinerTree(points, newlines, steinerPoints);
+		return new SteinerTree(tree.getPoints(), newlines, steinerPoints);
 	}
 
 	private static Line[] getNewLines(Line line, Point steinerPoint) {
