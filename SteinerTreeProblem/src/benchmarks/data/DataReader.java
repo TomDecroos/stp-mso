@@ -1,4 +1,4 @@
-package benchmarks;
+package benchmarks.data;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -8,11 +8,11 @@ import java.io.InputStreamReader;
 
 import basic.Point;
 
-public class DataConfig {
-	public static String BENCHMARKLOCATION = "src/benchmarks/";
+public class DataReader {
+	public static String BENCHMARKLOCATION = "src/benchmarks/data/";
 	public static String BENCHMARKNAME = "estein";
 	public Point[][] data;
-	public DataConfig(int size) {
+	public DataReader(int size) {
 		try {
 			readData(BENCHMARKLOCATION + BENCHMARKNAME + size +".txt");
 		} catch (NumberFormatException e) {

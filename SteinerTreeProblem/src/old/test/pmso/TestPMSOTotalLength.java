@@ -18,7 +18,7 @@ public class TestPMSOTotalLength {
 			50// Nb of Steiner points
 			);
 	
-	static int swarmsize = 500;	// swarmsize
+	static int swarmsize = 5000;	// swarmsize
 	static int cycles = 500;	// cycles
 	static double w1 =	0.99;		// w1
 	static double w2 = 0.25;	// w2

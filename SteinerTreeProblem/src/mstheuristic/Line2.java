@@ -1,4 +1,4 @@
-package msth;
+package mstheuristic;
 
 import basic.Line;
 import basic.Point;

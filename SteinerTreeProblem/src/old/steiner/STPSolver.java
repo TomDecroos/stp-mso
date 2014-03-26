@@ -5,7 +5,7 @@ import old.pso.Particle;
 import old.pso.ParticleSwarmOptimizer;
 import old.pso.SwarmConfig;
 import old.statistics.ProblemSolver;
-import animate.SteinerTree;
+import visual.SteinerTree;
 
 public class STPSolver implements ProblemSolver {
 	

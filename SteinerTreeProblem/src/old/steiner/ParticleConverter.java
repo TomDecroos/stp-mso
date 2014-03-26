@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import old.kruskall.Kruskall;
 import old.pso.Particle;
+import visual.SteinerTree;
 
-import animate.SteinerTree;
 import basic.Point;
 import disjointset.Node;
 

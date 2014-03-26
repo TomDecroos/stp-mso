@@ -1,4 +1,4 @@
-package old.visual;
+package visual;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,37 +8,32 @@ import javax.swing.JPanel;
 
 import stpmso.Particle;
 import stpmso.MultiSwarmOptimizer;
-import visual.SteinerTree;
-
 import basic.Line;
 import basic.Point;
 
-public class BottleneckMSO {
+public class Animator {
+	MultiSwarmOptimizer solver;
+	int cycles;
+	AnimatorConfig cfg;
 	
-
-	private MultiSwarmOptimizer solver;
-	private int steps;
-	private DrawConfig drawcfg;
-	private int sleep;
-	public BottleneckMSO(MultiSwarmOptimizer solver, int steps, int sleep, DrawConfig drawcfg) {
+	public Animator(MultiSwarmOptimizer solver, int cycles, AnimatorConfig cfg) {
 		this.solver = solver;
-		this.steps = steps;
-		this.drawcfg = drawcfg;
-		this.sleep = sleep;
+		this.cycles = cycles;
+		this.cfg = cfg;
 	}
-	
+
 	public void play() {
 		 JFrame frame=new JFrame();
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setBounds(drawcfg.x,drawcfg.y,drawcfg.width,drawcfg.length);
+         frame.setBounds(cfg.x,cfg.y,cfg.width,cfg.length);
          DrawPanel draw=new DrawPanel();
          frame.getContentPane().add(draw);
          frame.setVisible(true);
-         for(int i=0;i<steps;i++) {
+         for(int i=0;i<cycles;i++) {
         	 solver.evolve();
         	 draw.counter++;
         	 draw.repaint();
-        	 try{Thread.sleep(sleep); } catch(Exception e) {}
+        	 try{Thread.sleep(cfg.sleep); } catch(Exception e) {}
          }
 	}
 
@@ -77,35 +72,40 @@ public class BottleneckMSO {
 		public void paintComponent(Graphics g) {
 			g.setColor(Color.WHITE);
 		    g.fillRect(0,0,this.getWidth(),this.getHeight());
-		    paintParticles(g,solver.getParticles());
-			paintSteinerTree(g,solver.getSteinerTree());
-			paintBottleNeck(g,solver.getSteinerTree());
+		    if(cfg.particles) paintParticles(g);
+		    paintTree(g);
+			if(cfg.steinerEdges) paintSteinerStuff(g);
+			if(cfg.bottleneck) paintBottleNeck(g);
+			paintText(g);
+		}
+
+		private void paintText(Graphics g) {
+			g.setColor(Color.WHITE);
+			g.fillRect(50, 10, 500, 50);
 		    g.setColor(Color.BLACK);
-		    g.drawString("Cycle: " + counter + "/" + steps, 50, 50);
-		    g.drawString("Bottleneck: " + solver.getSteinerTree().getBottleneck().getLength() , 150, 50);
+		    g.drawString("Cycle: " + counter + "/" + cycles, 50, 25);
+		    g.drawString("#Steiner Points: " + solver.getSteinerTree().getSteinerPoints().length, 150, 25);
+		    g.drawString("Bottleneck: " + solver.getSteinerTree().getBottleneck().getLength() , 50, 50);
+		    g.drawString("Total length: " + solver.getSteinerTree().getLength() , 250, 50);
+			
 		}
 
-		private void paintSteinerTree(Graphics g, SteinerTree steinerTree) {
+		private void paintTree(Graphics g) {
 			g.setColor(Color.BLACK);
-			paintTree(g,steinerTree);
-			g.setColor(Color.RED);
-			paintSteinerStuff(g,steinerTree);
-		}
-
-		private void paintTree(Graphics g, SteinerTree steinerTree) {
-			paintPoints(g,steinerTree.getPoints());
-			paintLines(g,steinerTree.getLines());
+			paintPoints(g);
+			paintLines(g);
 		}
 		
-		private void paintPoints(Graphics g, Point[] points) {
+		private void paintPoints(Graphics g) {
+			Point[] points = solver.getSteinerTree().getPoints();
+			int psize = cfg.graphpointsize;
 			for(Point point : points) {
-				paintPoint(g,point);
+				paintPoint(g,point,psize);
 			}
 		}
 
-		private void paintPoint(Graphics g, Point point) {
+		private void paintPoint(Graphics g, Point point,int psize) {
 			Point p = convertPointToDrawScale(point);
-			int psize = drawcfg.pointsize;
 			g.fillOval( (int) p.getX()-psize/2, (int) p.getY()-psize/2, psize, psize);
 		}
 
@@ -115,7 +115,8 @@ public class BottleneckMSO {
 			return new Point(x,y);
 		}
 
-		private void paintLines(Graphics g, Line[] lines) {
+		private void paintLines(Graphics g) {
+			Line[] lines = solver.getSteinerTree().getLines();
 			for(Line line : lines) {
 				paintLine(g,line);
 			}
@@ -127,10 +128,11 @@ public class BottleneckMSO {
 			g.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
 		}
 
-		private void paintSteinerStuff(Graphics g, SteinerTree steinerTree) {
+		private void paintSteinerStuff(Graphics g) {
+			SteinerTree steinerTree = solver.getSteinerTree();
 			g.setColor(Color.red);
 			for(Point p : steinerTree.getSteinerPoints()) {
-				paintPoint(g,p);
+				paintPoint(g,p,cfg.graphpointsize);
 			}
 			
 			for(Line l : steinerTree.getLines()) {
@@ -148,29 +150,24 @@ public class BottleneckMSO {
 			return false;
 		}
 
-		private void paintBottleNeck(Graphics g, SteinerTree steinerTree) {
+		private void paintBottleNeck(Graphics g) {
+			
 			g.setColor(Color.GREEN);
-			paintLine(g,steinerTree.getBottleneck());
+			paintLine(g,solver.getSteinerTree().getBottleneck());
 			
 		}
 		
-		private void paintParticles(Graphics g, Particle[][] swarms) {
-			Color[] colors = new Color[] {	Color.BLUE,
-					Color.CYAN,
-					Color.DARK_GRAY,
-					Color.LIGHT_GRAY,
-					Color.PINK,
-					Color.MAGENTA,
-					Color.orange,
-					Color.YELLOW};
+		private void paintParticles(Graphics g) {
+			Particle[][] swarms = solver.getParticles();
+			int psize = cfg.particlepointsize;
 			int i=0;
 			for(Particle[] swarm : swarms) {
-				g.setColor(colors[i++ % colors.length]);
+				g.setColor(cfg.colors[i++ % cfg.colors.length]);
 				for(Particle p : swarm) {
-				paintPoint(g, new Point(p.getX(),p.getY()));
+				paintPoint(g, new Point(p.getX(),p.getY()),psize);;
 				}
 			}
 		}
-
 	}
+
 }

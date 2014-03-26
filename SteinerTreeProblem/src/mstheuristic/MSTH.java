@@ -1,25 +1,25 @@
-package msth;
+package mstheuristic;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import old.kruskall.KruskallMethods;
-import old.steiner.STP;
+import mst.Kruskall;
+import mst.MinimalSpanningTree;
 
-import animate.SteinerTree;
+import visual.SteinerTree;
+
 import basic.Line;
 import basic.Point;
-import basic.Tree;
 
 public class MSTH {
 
-	public static SteinerTree getSteinerTree(STP stp) {
-		Tree tree = KruskallMethods.getMST(KruskallMethods.getNodes(stp.getPoints()));
-		LinkedList<Line> lines = new LinkedList<Line>(Arrays.asList(tree.getLines()));
-		Point[] steinerPoints = new Point[stp.getK()];
+	public static SteinerTree getSteinerTree(Point[] points,int k) {
+		MinimalSpanningTree tree = Kruskall.constructMinimalSpanningTree(Kruskall.convertToNodes(points));
+		LinkedList<Line> lines = new LinkedList<Line>(Arrays.asList(tree.getEdges()));
+		Point[] steinerPoints = new Point[k];
 		Collections.sort(lines);
-		for(int i=0;i<stp.getK();i++) {
+		for(int i=0;i<k;i++) {
 			Line line = lines.removeLast();
 			Point steinerPoint = getSteinerPoint(line);
 			Line[] newLines = getNewLines(line,steinerPoint);
@@ -29,9 +29,9 @@ public class MSTH {
 		}
 		
 		//Point[] points = KruskallMethods.merge(tree.getPoints(),steinerPoints);
-		// ERROR: WTF?
+		// ERROR: edges and line2s cannot be merged with system.arraycopy()
 		Line[] newlines = lines.toArray(new Line[0]);
-		return new SteinerTree(tree.getPoints(), newlines, steinerPoints);
+		return new SteinerTree(tree.getNodes(), newlines, steinerPoints);
 	}
 
 	private static Line[] getNewLines(Line line, Point steinerPoint) {

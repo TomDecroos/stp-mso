@@ -7,8 +7,8 @@ import java.util.Collections;
 import old.kruskall.Kruskall;
 import old.steiner.Edge;
 import old.steiner.STP;
+import visual.SteinerTree;
 
-import animate.SteinerTree;
 import basic.Point;
 import basic.Tree;
 import disjointset.DisjointSet;

@@ -8,21 +8,21 @@ import old.pmso.PMSO;
 import old.pmso.PMSOAnimation;
 import old.visual.DrawConfig;
 import old.visual.SteinerTreeDrawer;
+import visual.SteinerTree;
 
-import animate.SteinerTree;
 
-import msth.MSTH;
+import mstheuristic.MSTH;
 
 
 public class PMSOvsMSTH {
 	static STPConfig stpcfg = new STPConfig(
-			20,		// Nb of points,
-			2,		// index of data
-			100		// Nb of Steiner points
+			100,		// Nb of points,
+			0,		// index of data
+			50		// Nb of Steiner points
 			);
 	
-	static int swarmsize = 250;	// swarmsize
-	static int cycles = 100;	// cycles
+	static int swarmsize = 500;	// swarmsize
+	static int cycles = 500;	// cycles
 	static double w1 =	0.95;		// w1
 	static double w2 = 0.25;	// w2
 	
@@ -33,7 +33,8 @@ public class PMSOvsMSTH {
 			);
 	static int sleep = 0;
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		SteinerTree tree = MSTH.getSteinerTree(stpcfg.getSTP());
+		SteinerTree tree = MSTH.getSteinerTree(stpcfg.getSTP().getPoints(),
+											   stpcfg.k);
 		new SteinerTreeDrawer(tree).draw(new DrawConfig(drawcfg.width,0,drawcfg.width,drawcfg.length,drawcfg.pointsize));
 		
 		PMSO pmso = new PMSO(stpcfg.getSTP(), swarmsize,w1,w2);

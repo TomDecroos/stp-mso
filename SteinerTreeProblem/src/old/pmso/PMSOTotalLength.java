@@ -1,7 +1,7 @@
 package old.pmso;
 
 import old.steiner.STP;
-import animate.SteinerTree;
+import visual.SteinerTree;
 import basic.Tree;
 import disjointset.Node;
 

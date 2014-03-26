@@ -7,8 +7,8 @@ import javax.swing.*;
 
 import old.pso.Particle;
 import old.steiner.STPStepByStepSolver;
+import visual.SteinerTree;
 
-import animate.SteinerTree;
 import basic.Line;
 import basic.Point;
 

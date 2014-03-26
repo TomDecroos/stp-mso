@@ -2,6 +2,8 @@ package stpmso;
 
 import java.util.Comparator;
 
+import mst.MinimalSpanningTree;
+
 public class TreeLengthComparator implements Comparator<MinimalSpanningTree> {
 
 	@Override

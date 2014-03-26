@@ -1,4 +1,4 @@
-package animate;
+package visual;
 
 import basic.Line;
 import basic.Point;

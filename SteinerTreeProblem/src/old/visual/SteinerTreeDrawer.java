@@ -3,7 +3,8 @@ package old.visual;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import animate.SteinerTree;
+import visual.SteinerTree;
+
 import basic.Line;
 import basic.Point;
 

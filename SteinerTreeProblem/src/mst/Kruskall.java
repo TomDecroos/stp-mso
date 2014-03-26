@@ -1,7 +1,9 @@
-package stpmso;
+package mst;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+
 
 import basic.Point;
 import disjointset.DisjointSet;
@@ -19,7 +21,7 @@ public class Kruskall {
 	}
 
 	
-	public static MinimalSpanningTree constructMinimalSpannningTree(Node[] nodes) {
+	public static MinimalSpanningTree constructMinimalSpanningTree(Node[] nodes) {
 		Edge[] edges = getAllEdges(nodes);
 		Edge[] treeEdges = new Edge[nodes.length - 1];
 		int nbOfTreeEdges = 0;
@@ -70,7 +72,7 @@ public class Kruskall {
 	private static Edge[] getExtraMSTEdges(MinimalSpanningTree mst, Node[] nodes) {
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		for(int i=0;i<nodes.length;i++) {
-			SteinerPointEdges lst = new SteinerPointEdges(nodes[i]);
+			UsableEdges lst = new UsableEdges(nodes[i]);
 			for(int j=i+1;j<nodes.length;j++){
 				lst.add(nodes[j]);
 			}

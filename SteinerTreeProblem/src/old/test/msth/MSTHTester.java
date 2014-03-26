@@ -5,10 +5,10 @@ import java.io.IOException;
 import old.input.STPConfig;
 import old.visual.DrawConfig;
 import old.visual.SteinerTreeDrawer;
+import visual.SteinerTree;
 
-import animate.SteinerTree;
 
-import msth.MSTH;
+import mstheuristic.MSTH;
 
 public class MSTHTester {
 
@@ -29,7 +29,7 @@ public class MSTHTester {
 	 * @throws NumberFormatException 
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		SteinerTree tree = MSTH.getSteinerTree(stpcfg.getSTP());
+		SteinerTree tree = MSTH.getSteinerTree(stpcfg.getSTP().getPoints(),stpcfg.k);
 		new SteinerTreeDrawer(tree).draw(drawcfg);
 
 	}

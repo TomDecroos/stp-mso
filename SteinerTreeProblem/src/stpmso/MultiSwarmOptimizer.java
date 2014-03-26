@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import mst.Kruskall;
+import mst.MinimalSpanningTree;
+
+import visual.SteinerTree;
+
 import disjointset.Node;
 
-import animate.SteinerTree;
 import basic.Point;
 
 /**
@@ -73,7 +77,7 @@ public class MultiSwarmOptimizer {
 	}
 	private void setup(Point[] points) {
 		Node[] nodes = Kruskall.convertToNodes(points);
-		this.basic = Kruskall.constructMinimalSpannningTree(nodes);
+		this.basic = Kruskall.constructMinimalSpanningTree(nodes);
 		this.best = basic;
 		this.swarms = new ArrayList<Swarm>();
 	}

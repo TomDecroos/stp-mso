@@ -1,4 +1,4 @@
-package stpmso;
+package mst;
 
 import disjointset.Node;
 

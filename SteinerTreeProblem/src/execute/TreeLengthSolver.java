@@ -3,13 +3,13 @@ package execute;
 import stpmso.MultiSwarmOptimizer;
 import stpmso.MultiSwarmOptimizerConfig;
 import stpmso.TreeLengthComparator;
-import animate.Animator;
-import animate.AnimatorConfig;
-import benchmarks.DataConfig;
+import visual.Animator;
+import visual.AnimatorConfig;
+import benchmarks.data.DataReader;
 
 public class TreeLengthSolver {
 	
-	public static DataConfig data = new DataConfig(60);
+	public static DataReader data = new DataReader(1000);
 	public static int index= 5;
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(

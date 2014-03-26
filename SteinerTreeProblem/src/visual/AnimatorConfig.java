@@ -1,4 +1,4 @@
-package animate;
+package visual;
 
 import java.awt.Color;
 
@@ -22,6 +22,14 @@ public class AnimatorConfig {
 		Color.MAGENTA,
 		Color.orange,
 		Color.YELLOW};
+	
+	public static AnimatorConfig getBottleneckConfig() {
+		return new AnimatorConfig();
+	}
+	
+	public static AnimatorConfig getTreeLengthConfig() {
+		return new AnimatorConfig(true,false,true);
+	}
 	
 	public AnimatorConfig() {
 		this(0,0,650,650);

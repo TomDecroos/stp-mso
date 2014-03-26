@@ -4,7 +4,7 @@ import old.pso.FitnessEvaluator;
 import old.pso.Particle;
 import old.pso.ParticleSwarmOptimizer;
 import old.pso.SwarmConfig;
-import animate.SteinerTree;
+import visual.SteinerTree;
 
 public class STPStepByStepSolver {
 	public STP stp;

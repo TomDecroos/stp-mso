@@ -1,21 +1,22 @@
-package stpmso;
+package mst;
 
 import java.util.ArrayList;
+
 
 import disjointset.Node;
 
 /**
- * A class representing the possible edges to use for adding a steiner point
+ * A class representing the possible edges to use for adding a new point
  * to a minimal spanning tree.
  * @author Tom
  *
  */
-public class SteinerPointEdges {
-	private static int MAX= 5;
+public class UsableEdges {
+	public static int MAX=5;
 	private ArrayList<Edge> edges;
 	private Node node;
 	
-	public SteinerPointEdges(Node node) {
+	public UsableEdges(Node node) {
 		this.edges = new ArrayList<Edge>();
 		this.node = node;
 	}

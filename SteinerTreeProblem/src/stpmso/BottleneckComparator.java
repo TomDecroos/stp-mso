@@ -2,6 +2,8 @@ package stpmso;
 
 import java.util.Comparator;
 
+import mst.MinimalSpanningTree;
+
 public class BottleneckComparator implements Comparator<MinimalSpanningTree> {
 
 	@Override

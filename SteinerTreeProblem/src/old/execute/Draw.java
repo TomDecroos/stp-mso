@@ -10,8 +10,8 @@ import old.steiner.STPSolver;
 import old.steiner.TreeLengthEvaluator;
 import old.visual.DrawConfig;
 import old.visual.SteinerTreeDrawer;
+import visual.SteinerTree;
 
-import animate.SteinerTree;
 
 
 @SuppressWarnings("unused")

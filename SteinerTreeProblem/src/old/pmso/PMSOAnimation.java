@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 
 import old.pmso.PMSO.Particle;
 import old.visual.DrawConfig;
+import visual.SteinerTree;
 
 
-import animate.SteinerTree;
 import basic.Line;
 import basic.Point;
 
