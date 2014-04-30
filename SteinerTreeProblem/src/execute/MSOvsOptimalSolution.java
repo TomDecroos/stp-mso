@@ -22,8 +22,8 @@ public class MSOvsOptimalSolution {
 	/**
 	 * DATA CONFIG
 	 */
-	public static int problemsize = 80;
-	public static int index= 5;
+	public static int problemsize = 100;
+	public static int index= 0;
 	
 	/**
 	 * MSO CONFIG
@@ -31,7 +31,7 @@ public class MSOvsOptimalSolution {
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
 			500, // swarmsize
-			0.95, // w1
+			0.99, // w1
 			0.25 // w2
 			);
 	public static int usableEdges = 10; // amount of edges to process per steiner point to add.
@@ -55,9 +55,10 @@ public class MSOvsOptimalSolution {
 		Node[] basicNodes = Kruskall.convertToNodes(new DataReader(problemsize).getPoints(index));
 		Node[] steinerNodes = Kruskall.convertToNodes(new SolutionReader(problemsize).getSteinerPoints(index));
 		Node[] nodes = merge(basicNodes,steinerNodes);
+		MinimalSpanningTree original = Kruskall.constructMinimalSpanningTree(basicNodes);
 		MinimalSpanningTree tree = Kruskall.constructMinimalSpanningTree(nodes);
 		SteinerTree steinerTree = new SteinerTree(tree.getNodes(), tree.getEdges(), steinerNodes);
-		new Drawer(steinerTree,drawcfg).draw();
+		new Drawer(steinerTree,drawcfg,original).draw();
 	}
 	
 	private static <T> T[] merge(T[] a, T[] b) {
@@ -68,8 +69,10 @@ public class MSOvsOptimalSolution {
 
 	private static void animateMSO() {
 		Point[] points = new DataReader(problemsize).getPoints(index);
+		Node[] nodes = Kruskall.convertToNodes(points);
+		MinimalSpanningTree original = Kruskall.constructMinimalSpanningTree(nodes);
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(points, msoconfig, new TreeLengthComparator());
-		new Animator(mso,cycles,animatorcfg).play();
+		new Animator(mso,cycles,animatorcfg,original).play();
 	}
 
 }

@@ -1,5 +1,8 @@
 package execute;
 
+import mst.Kruskall;
+import mst.MinimalSpanningTree;
+import disjointset.Node;
 import stpmso.BottleneckComparator;
 import stpmso.MultiSwarmOptimizer;
 import stpmso.MultiSwarmOptimizerConfig;
@@ -22,7 +25,9 @@ public class BottleneckSolver {
 	
 	public static void main(String[] args) {
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(data.getPoints(index), msoconfig, new BottleneckComparator());
-		new Animator(mso,cycles,animatorcfg).play();
+		Node[] nodes = Kruskall.convertToNodes(data.getPoints(index));
+		MinimalSpanningTree original = Kruskall.constructMinimalSpanningTree(nodes);
+		new Animator(mso,cycles,animatorcfg,original).play();
 	}
 	
 }

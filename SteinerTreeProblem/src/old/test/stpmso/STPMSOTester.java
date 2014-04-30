@@ -13,6 +13,7 @@ import visual.Animator;
 import visual.AnimatorConfig;
 
 
+@SuppressWarnings("unused")
 public class STPMSOTester {
 	static DataReader data = new DataReader(100);
 	static int index = 0;
@@ -26,7 +27,7 @@ public class STPMSOTester {
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(data.getPoints(index),cfg, new TreeLengthComparator());
-		new Animator(mso,cycles,new AnimatorConfig()).play();
+		//new Animator(mso,cycles,new AnimatorConfig()).play();
 	}
 
 }

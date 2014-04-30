@@ -6,16 +6,20 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import mst.MinimalSpanningTree;
+
 import basic.Line;
 import basic.Point;
 
 public class Drawer {
 	private SteinerTree tree;
 	private DrawConfig cfg;
+	private MinimalSpanningTree original;
 	
-	public Drawer(SteinerTree tree, DrawConfig cfg) {
+	public Drawer(SteinerTree tree, DrawConfig cfg,MinimalSpanningTree original) {
 		this.tree = tree;
 		this.cfg = cfg;
+		this.original = original;
 	}
 	
 	public void draw() {
@@ -70,8 +74,14 @@ public class Drawer {
 		private void paintText(Graphics g) {
 		    g.setColor(Color.BLACK);
 		    g.drawString("#Steiner Points: " + tree.getSteinerPoints().length, 50, 25);
-		    g.drawString("Bottleneck: " + tree.getBottleneck().getLength() , 50, 50);
-		    g.drawString("Total length: " + tree.getLength() , 250, 50);
+		    double a = tree.getBottleneck().getLength();
+		    double b = original.getBottleneck();
+		    double bottleneckpercentage = a/b * 100;
+		    g.drawString("Bottleneck: " + bottleneckpercentage + "%" , 50, 50);
+		    double c = tree.getLength();
+		    double d = original.getLength();
+		    double totallengthpercentage = c/d * 100;
+		    g.drawString("Total length: " + totallengthpercentage + "%" , 250, 50);
 		}
 
 		private void paintTree(Graphics g) {

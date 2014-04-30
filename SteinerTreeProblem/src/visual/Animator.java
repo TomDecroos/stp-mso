@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import mst.MinimalSpanningTree;
+
 import stpmso.Particle;
 import stpmso.MultiSwarmOptimizer;
 import basic.Line;
@@ -15,11 +17,13 @@ public class Animator {
 	MultiSwarmOptimizer solver;
 	int cycles;
 	AnimatorConfig cfg;
+	MinimalSpanningTree original;
 	
-	public Animator(MultiSwarmOptimizer solver, int cycles, AnimatorConfig cfg) {
+	public Animator(MultiSwarmOptimizer solver, int cycles, AnimatorConfig cfg,MinimalSpanningTree original) {
 		this.solver = solver;
 		this.cycles = cycles;
 		this.cfg = cfg;
+		this.original = original;
 	}
 
 	public void play() {
@@ -85,8 +89,14 @@ public class Animator {
 		    g.setColor(Color.BLACK);
 		    g.drawString("Cycle: " + counter + "/" + cycles, 50, 25);
 		    g.drawString("#Steiner Points: " + solver.getSteinerTree().getSteinerPoints().length, 150, 25);
-		    g.drawString("Bottleneck: " + solver.getSteinerTree().getBottleneck().getLength() , 50, 50);
-		    g.drawString("Total length: " + solver.getSteinerTree().getLength() , 250, 50);
+		    double a = solver.getSteinerTree().getBottleneck().getLength();
+		    double b = original.getBottleneck();
+		    double bottleneckpercentage = a/b * 100;
+		    g.drawString("Bottleneck: " + bottleneckpercentage + "%" , 50, 50);
+		    double c =  solver.getSteinerTree().getLength();
+		    double d = original.getLength();
+		    double totallengthpercentage = c/d * 100;
+		    g.drawString("Total length: " + totallengthpercentage + "%" , 250, 50);
 			
 		}
 
