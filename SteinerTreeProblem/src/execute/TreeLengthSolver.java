@@ -12,7 +12,7 @@ import benchmarks.data.DataReader;
 
 public class TreeLengthSolver {
 	
-	public static DataReader data = new DataReader(500);
+	public static DataReader data = new DataReader(70);
 	public static int index= 0;
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
@@ -21,7 +21,7 @@ public class TreeLengthSolver {
 			0.25 // w2
 			);
 	public static AnimatorConfig animatorcfg = new AnimatorConfig(
-			0, 0, 650, 650, 4, 2, 0, true, false, false);
+			0, 0, 850, 650, 4, 2, 0, true, false, true);
 	
 	public static void main(String[] args) {
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(data.getPoints(index), msoconfig, new TreeLengthComparator());

@@ -12,16 +12,17 @@ import benchmarks.data.DataReader;
 
 public class BottleneckSolver {
 	
-	public static DataReader data = new DataReader(10);
+	public static DataReader data = new DataReader(50);
 	public static int index= 0;
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
-			1, // max steiner points
+			50, // max steiner points
 			500, // cycles
 			0.95, // w1
 			0.25 // w2
 			);
-	public static AnimatorConfig animatorcfg = new AnimatorConfig();
+	public static AnimatorConfig animatorcfg = new AnimatorConfig(
+			0, 0, 850, 650, 4, 2, 500, true, true, true);
 	
 	public static void main(String[] args) {
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(data.getPoints(index), msoconfig, new BottleneckComparator());
