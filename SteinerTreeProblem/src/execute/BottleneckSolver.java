@@ -8,25 +8,37 @@ import stpmso.MultiSwarmOptimizer;
 import stpmso.MultiSwarmOptimizerConfig;
 import visual.Animator;
 import visual.AnimatorConfig;
+import basic.Point;
 import benchmarks.data.DataReader;
 
 public class BottleneckSolver {
 	
-	public static DataReader data = new DataReader(1000);
+	/**
+	 * DATA CONFIG
+	 */
+	public static int problemsize = 10000;
 	public static int index= 0;
+	
+	/**
+	 * MSO CONFIG
+	 */
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
 			50, // max steiner points
-			500, // cycles
+			500, // swarmsize
 			0.95, // w1
 			0.25 // w2
 			);
+	/**
+	 * VISUAL CONFIG
+	 */
 	public static AnimatorConfig animatorcfg = new AnimatorConfig(
 			0, 0, 850, 650, 4, 2, 500, true, true, true);
 	
 	public static void main(String[] args) {
-		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(data.getPoints(index), msoconfig, new BottleneckComparator());
-		Node[] nodes = Kruskall.convertToNodes(data.getPoints(index));
+		Point[] points = new DataReader(problemsize).getPoints(index);
+		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(points, msoconfig, new BottleneckComparator());
+		Node[] nodes = Kruskall.convertToNodes(points);
 		MinimalSpanningTree original = Kruskall.constructMinimalSpanningTree(nodes);
 		new Animator(mso,cycles,animatorcfg,original).play();
 	}

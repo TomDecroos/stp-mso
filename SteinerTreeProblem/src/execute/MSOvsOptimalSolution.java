@@ -22,7 +22,7 @@ public class MSOvsOptimalSolution {
 	/**
 	 * DATA CONFIG
 	 */
-	public static int problemsize = 100;
+	public static int problemsize = 10000;
 	public static int index= 0;
 	
 	/**
@@ -31,7 +31,7 @@ public class MSOvsOptimalSolution {
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
 			500, // swarmsize
-			0.99, // w1
+			0.95, // w1
 			0.25 // w2
 			);
 	public static int usableEdges = 10; // amount of edges to process per steiner point to add.
@@ -47,7 +47,7 @@ public class MSOvsOptimalSolution {
 	 */
 	public static void main(String[] args) {
 		UsableEdges.MAX = usableEdges;
-		drawOptimalSolution();
+		//drawOptimalSolution();
 		animateMSO();
 	}
 	
