@@ -22,7 +22,7 @@ public class Kruskall {
 
 	
 	public static MinimalSpanningTree constructMinimalSpanningTree(Node[] nodes) {
-		Edge[] edges = getAllEdges(nodes);
+		Edge[] edges = getAllEdgesBeta(nodes);
 		Edge[] treeEdges = new Edge[nodes.length - 1];
 		int nbOfTreeEdges = 0;
 		
@@ -70,20 +70,15 @@ public class Kruskall {
 	}
 	
 	private static Edge[] getExtraMSTEdges(MinimalSpanningTree mst, Node[] nodes) {
-		ArrayList<Edge> edges = new ArrayList<Edge>();
-		for(int i=0;i<nodes.length;i++) {
-			UsableEdges lst = new UsableEdges(nodes[i]);
-			for(int j=i+1;j<nodes.length;j++){
-				lst.add(nodes[j]);
-			}
-			for(int j=0;j<mst.getNodes().length;j++) {
-				lst.add(mst.getNodes()[j]);
-			}
-			for(Edge edge : lst.getEdges()) {
-				edges.add(edge);
-			}
+		Edge[] edges = new Edge[nodes.length*UsableEdges.MAX];
+		int cnt = 0;
+		for(Node node : nodes) {
+			UsableEdges lst = new UsableEdges(node);
+			lst.add(nodes);
+			lst.add(mst.getNodes());
+			for(Edge edge : lst.getEdges()) edges[cnt++] = edge;
 		}
-		return edges.toArray(new Edge[0]);
+		return edges;
 	}
 
 	public static <T> T[] merge(T[] a, T[] b) {
@@ -102,6 +97,18 @@ public class Kruskall {
 	}
 
 	
+	private static Edge[] getAllEdgesBeta(Node[] nodes) {
+		Edge[] edges = new Edge[ nodes.length * UsableEdges.MAX];
+		int cnt = 0;
+		for(Node node : nodes) {
+			UsableEdges lst = new UsableEdges(node);
+			lst.add(nodes);
+			for(Edge edge : lst.getEdges()) edges[cnt++] = edge;
+		}
+		Arrays.sort(edges);
+		return edges;
+	}
+	
 	private static Edge[] getAllEdges(Node[] nodes) {
 		int n = nodes.length;
 		// a complete graph has n nodes and n*(n-1)/2 edges
@@ -117,4 +124,6 @@ public class Kruskall {
 		Arrays.sort(allEdges);
 		return allEdges;
 	}
+	
+	
 }

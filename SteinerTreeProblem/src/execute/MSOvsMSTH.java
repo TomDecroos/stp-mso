@@ -20,7 +20,7 @@ public class MSOvsMSTH {
 	/**
 	 * DATA CONFIG
 	 */
-	public static int problemsize = 10;
+	public static int problemsize = 10000;
 	public static int index= 0;
 	/**
 	 * MSO CONFIG

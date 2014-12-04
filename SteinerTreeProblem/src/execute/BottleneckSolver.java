@@ -12,7 +12,7 @@ import benchmarks.data.DataReader;
 
 public class BottleneckSolver {
 	
-	public static DataReader data = new DataReader(50);
+	public static DataReader data = new DataReader(1000);
 	public static int index= 0;
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(

@@ -12,7 +12,7 @@ import disjointset.Node;
  *
  */
 public class UsableEdges {
-	public static int MAX=5;
+	public static int MAX=10;
 	private ArrayList<Edge> edges;
 	private Node node;
 	
