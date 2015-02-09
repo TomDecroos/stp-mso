@@ -19,7 +19,7 @@ public class DrawConfig {
 	}
 	
 	public DrawConfig() {
-		this(650,0,650,650,true,true,4);
+		this(950,0,950,950,true,true,4);
 	}
 	public DrawConfig(boolean steinerEdges, boolean bottleneck) {
 		this();

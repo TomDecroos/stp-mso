@@ -1,9 +1,6 @@
 package mst;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-
-
 
 import basic.Point;
 import disjointset.DisjointSet;
@@ -109,6 +106,7 @@ public class Kruskall {
 		return edges;
 	}
 	
+	@SuppressWarnings("unused")
 	private static Edge[] getAllEdges(Node[] nodes) {
 		int n = nodes.length;
 		// a complete graph has n nodes and n*(n-1)/2 edges

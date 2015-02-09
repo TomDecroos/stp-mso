@@ -1,14 +1,13 @@
 package mstheuristic;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import mst.Edge;
 import mst.Kruskall;
 import mst.MinimalSpanningTree;
-
 import visual.SteinerTree;
-
 import basic.Line;
 import basic.Point;
 
@@ -16,33 +15,62 @@ public class MSTH {
 
 	public static SteinerTree getSteinerTree(Point[] points,int k) {
 		MinimalSpanningTree tree = Kruskall.constructMinimalSpanningTree(Kruskall.convertToNodes(points));
-		LinkedList<Line> lines = new LinkedList<Line>(Arrays.asList(tree.getEdges()));
-		Point[] steinerPoints = new Point[k];
-		Collections.sort(lines);
+		LinkedList<Line2> lines = convertToLines(tree.getEdges());
+		
 		for(int i=0;i<k;i++) {
-			Line line = lines.removeLast();
-			Point steinerPoint = getSteinerPoint(line);
-			Line[] newLines = getNewLines(line,steinerPoint);
-			lines.add(newLines[0]);lines.add(newLines[1]);
-			steinerPoints[i] = steinerPoint;
 			Collections.sort(lines);
+			lines.getLast().addSteinerpoint();
 		}
 		
-		//Point[] points = KruskallMethods.merge(tree.getPoints(),steinerPoints);
-		// ERROR: edges and line2s cannot be merged with system.arraycopy()
-		Line[] newlines = lines.toArray(new Line[0]);
-		return new SteinerTree(tree.getNodes(), newlines, steinerPoints);
+		ArrayList<Point> steinerPoints = new ArrayList<>();
+		ArrayList<Line> newlines = new ArrayList<>();
+		for(Line2 line : lines) {
+			if(line.getSteinerpoints() > 0) {
+				Point[] linepoints = getSteinerPoints(line.getA(),line.getB(),line.getSteinerpoints());
+				for(Point point : linepoints) steinerPoints.add(point);
+				Line[] linelines = getNewLines(line.getA(),line.getB(),linepoints);
+				for(Line lineline : linelines) newlines.add(lineline);
+			} else {
+				newlines.add(line);
+			}
+		}
+		Line[] treelines = newlines.toArray(new Line[0]);
+		Point[] treepoints = steinerPoints.toArray(new Point[0]); 
+		return new SteinerTree(tree.getNodes(), treelines, treepoints);
 	}
 
-	private static Line[] getNewLines(Line line, Point steinerPoint) {
-		Line l1 = new Line2(line.getA(),steinerPoint);
-		Line l2 = new Line2(line.getB(),steinerPoint);
-		return new Line[] {l1,l2};
+	private static LinkedList<Line2> convertToLines(Edge[] edges) {
+		LinkedList<Line2> lines = new LinkedList<>();
+		for (Edge edge : edges) {
+			lines.add(new Line2(edge.getA(),edge.getB()));
+		}
+		return lines;
 	}
 
-	private static Point getSteinerPoint(Line line) {
-		double x = (line.getA().getX() + line.getB().getX())/2;
-		double y = (line.getA().getY() + line.getB().getY())/2;
-		return new Point(x,y);
+	private static Line[] getNewLines(Point a, Point b, Point[] steinerpoints) {
+		Line[] lines = new Line[steinerpoints.length+1];
+		lines[0] = new Line2(a,steinerpoints[0]);
+		for (int i = 1; i < steinerpoints.length; i++) {
+			lines[i] = new Line2(steinerpoints[i-1],steinerpoints[i]);
+		}
+		lines[steinerpoints.length] = new Line2(steinerpoints[steinerpoints.length-1],b);
+		return lines;
 	}
+
+	private static Point[] getSteinerPoints(Point a, Point b,int k) {
+		Point[] steinerpoints = new Point[k];
+		for(int i=0;i<k;i++) {
+			double xa = a.getX();
+			double xb = b.getX();
+			double ya = a.getY();
+			double yb = b.getY();
+			
+			double x = xa + (i+1)*(xb-xa)/(k+1);
+			double y = ya + (i+1)*(yb-ya)/(k+1);
+			steinerpoints[i] = new Point(x,y);
+		}
+		return steinerpoints;
+	}
+	
+	
 }

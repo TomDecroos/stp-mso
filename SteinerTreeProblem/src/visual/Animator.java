@@ -37,7 +37,7 @@ public class Animator {
         	 solver.evolve();
         	 draw.counter++;
         	 draw.repaint();
-        	 try{Thread.sleep(cfg.sleep); } catch(Exception e) {}
+        	 //try{Thread.sleep(cfg.sleep); } catch(Exception e) {}
          }
 	}
 

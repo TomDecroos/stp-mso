@@ -6,22 +6,31 @@ import basic.Point;
 public class Line2 implements Line{
 	private Point a;
 	private Point b;
+	private int steinerpoints;
 	
+	public void addSteinerpoint() {
+		steinerpoints++;
+	}
+
+	public int getSteinerpoints() {
+		return steinerpoints;
+	}
+
 	public Line2(Point a, Point b) {
 		this.a = a;
 		this.b = b;
+		this.steinerpoints = 0;
 	}
 	
 	public double getLength() {
-		double x = a.getX() - b.getX();
-		double y = a.getY() - b.getY();
-		return Math.sqrt(x*x + y*y);
+		return Math.sqrt(getSquaredLength());
 	}
 	
 	public double getSquaredLength() {
 		double x = a.getX() - b.getX();
 		double y = a.getY() - b.getY();
-		return x*x + y*y;
+		int c = steinerpoints+1;
+		return (x*x + y*y)/(c*c);
 	}
 
 	public Point getA() {

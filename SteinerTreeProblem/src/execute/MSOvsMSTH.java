@@ -20,7 +20,7 @@ public class MSOvsMSTH {
 	/**
 	 * DATA CONFIG
 	 */
-	public static int problemsize = 10000;
+	public static int problemsize = 100;
 	public static int index= 0;
 	/**
 	 * MSO CONFIG
@@ -43,11 +43,10 @@ public class MSOvsMSTH {
 		Point[] points = new DataReader(problemsize).getPoints(index);
 		Node[] nodes = Kruskall.convertToNodes(points);
 		MinimalSpanningTree original = Kruskall.constructMinimalSpanningTree(nodes);
-		SteinerTree tree = MSTH.getSteinerTree(points,msoconfig.max);
+		SteinerTree tree = MSTH.getSteinerTree(points,50);
 		new Drawer(tree,drawcfg,original).draw();
-		
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(points,msoconfig,new BottleneckComparator());
-		new Animator(mso,cycles,animatorcfg,original).play();
+		//new Animator(mso,cycles,animatorcfg,original).play();
 	}
 
 }

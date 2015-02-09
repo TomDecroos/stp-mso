@@ -16,7 +16,7 @@ public class TreeLengthSolver {
 	/**
 	 * DATA CONFIG
 	 */
-	public static int problemsize = 10000;
+	public static int problemsize = 1000;
 	public static int index= 0;
 	
 	/**
@@ -24,8 +24,8 @@ public class TreeLengthSolver {
 	 */
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
-			50, // max steiner points
-			500, // swarmsize
+			10000, // max steiner points
+			50, // swarmsize
 			0.95, // w1
 			0.25 // w2
 			);

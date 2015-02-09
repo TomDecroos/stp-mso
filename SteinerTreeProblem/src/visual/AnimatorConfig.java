@@ -32,7 +32,7 @@ public class AnimatorConfig {
 	}
 	
 	public AnimatorConfig() {
-		this(0,0,650,650);
+		this(0,0,950,950);
 	}
 
 	public AnimatorConfig(int x, int y, int width, int height) {

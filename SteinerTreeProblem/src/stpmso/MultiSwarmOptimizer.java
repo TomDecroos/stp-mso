@@ -183,7 +183,7 @@ public class MultiSwarmOptimizer {
 		Particle[][] particles = new Particle[swarms.size()][];
 		int i=0;
 		for(Swarm swarm: swarms) {
-			particles[i++] = swarm.getParticles();
+			if(i<particles.length) particles[i++] = swarm.getParticles();
 		}
 		return particles;
 	}

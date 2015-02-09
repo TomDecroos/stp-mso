@@ -22,7 +22,7 @@ public class MSOvsOptimalSolution {
 	/**
 	 * DATA CONFIG
 	 */
-	public static int problemsize = 10000;
+	public static int problemsize = 90;
 	public static int index= 0;
 	
 	/**
@@ -30,7 +30,7 @@ public class MSOvsOptimalSolution {
 	 */
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
-			500, // swarmsize
+			50, // swarmsize
 			0.95, // w1
 			0.25 // w2
 			);
