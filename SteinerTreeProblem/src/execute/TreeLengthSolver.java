@@ -24,8 +24,8 @@ public class TreeLengthSolver {
 	 */
 	public static int cycles = 500;
 	public static MultiSwarmOptimizerConfig msoconfig = new MultiSwarmOptimizerConfig(
-			10000, // max steiner points
-			50, // swarmsize
+			// max steiner points
+			500, // swarmsize
 			0.95, // w1
 			0.25 // w2
 			);
@@ -33,7 +33,7 @@ public class TreeLengthSolver {
 	 * VISUAL CONFIG
 	 */
 	public static AnimatorConfig animatorcfg = new AnimatorConfig(
-			0, 0, 850, 650, 4, 2, 0, true, false, true);
+			0, 0, 850, 850, 4, 2, 0, true, false, true);
 	
 	public static void main(String[] args) {
 		Point[] points = new DataReader(problemsize).getPoints(index);

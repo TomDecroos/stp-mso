@@ -46,7 +46,7 @@ public class MSOvsMSTH {
 		SteinerTree tree = MSTH.getSteinerTree(points,50);
 		new Drawer(tree,drawcfg,original).draw();
 		MultiSwarmOptimizer mso = new MultiSwarmOptimizer(points,msoconfig,new BottleneckComparator());
-		//new Animator(mso,cycles,animatorcfg,original).play();
+		new Animator(mso,cycles,animatorcfg,original).play();
 	}
 
 }

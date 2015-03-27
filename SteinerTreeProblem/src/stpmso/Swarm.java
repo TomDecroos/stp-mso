@@ -38,4 +38,8 @@ public class Swarm {
 		return particles;
 	}
 	
+	public void removeParticles() {
+		particles = new Particle[]{};
+	}
+	
 }

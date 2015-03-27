@@ -139,6 +139,9 @@ public class MultiSwarmOptimizer {
 					swarm.setNode(node);
 				}
 			}
+			if(best.isOptimal(swarm.getNode())) {
+				swarm.removeParticles();
+			}
 			if(comparator.compare(temp,best) <= 0 ) {
 				iterator.remove();
 				best = temp;
@@ -146,10 +149,10 @@ public class MultiSwarmOptimizer {
 		}
 	}
 	
-
 	private void updateParticle(Particle p, Node node) {
-		double x = Math.random() * w2 * (node.getX() - p.px);
-		double y = Math.random() * w2 * (node.getY() - p.py);
+		double r = Math.random();
+		double x = r * w2 * (node.getX() - p.px);
+		double y = r * w2 * (node.getY() - p.py);
 		p.updateVelocity(w1, x, y);
 		p.fly();
 	}
